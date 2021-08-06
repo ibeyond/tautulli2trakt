@@ -306,22 +306,17 @@ if [ -n "$MEDIA" ] ; then
                 \\\"imdb\\\": \\\"${IMDB_ID}\\\"
             }
         }"
-    elif [[ $MEDIA == "episode" ]]; then
-       body="\\\"episode\\\": {
-             \\\"season\\\": ${SEASON},
-             \\\"number\\\": ${EPISODE},
-             \\\"title\\\": \\\"${SHOWNAME}\\\",
-             \\\"ids\\\": {
-                \\\"tvdb\\\": ${TVDB_ID}
-             }
-        }"
-    elif [[ $MEDIA == "show" ]]; then
+    elif [[ $MEDIA == "show" ]] || [[ $MEDIA == "episode" ]]; then
        body="\\\"show\\\": {
             \\\"title\\\": \\\"${SHOWNAME}\\\",
-            \\\"year\\\": ${YEAR},
+            \\\"year\\\": ${YEAR:2000},
             \\\"ids\\\": {
                 \\\"tvdb\\\": ${TVDB_ID}
             }
+        },
+        \\\"episode\\\": {
+            \\\"season\\\": ${SEASON},
+            \\\"number\\\": ${EPISODE}
         }"
     fi
     
