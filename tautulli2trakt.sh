@@ -31,11 +31,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 ## App info
-APP_VER=1.1.3.1
+APP_VER=1.1.3
 APP_DATE=$(${_date:-date} +%F)
 
 ## Script path and name
-SCRIPTNAME=$(basename "$0" .sh )
+SCRIPTNAME=$(basename "$0" .sh)
 SCRIPTPATH=$( cd "$(dirname '${BASH_SOURCE[0]}')" ; pwd -P )
 
 if [ -f "$SCRIPTPATH/$SCRIPTNAME.data" ]; then
@@ -306,19 +306,23 @@ if [ -n "$MEDIA" ] ; then
                 \\\"imdb\\\": \\\"${IMDB_ID}\\\"
             }
         }"
-    elif [[ $MEDIA == "show" ]] || [[ $MEDIA == "episode" ]]; then
+    elif [[ $MEDIA == "episode" ]]; then
+       body="\\\"episode\\\": {
+             \\\"season\\\": ${SEASON},
+             \\\"number\\\": ${EPISODE},
+             \\\"title\\\": \\\"${SHOWNAME}\\\",
+             \\\"ids\\\": {
+                \\\"tvdb\\\": ${TVDB_ID}
+             }
+        }"
+    elif [[ $MEDIA == "show" ]]; then
        body="\\\"show\\\": {
             \\\"title\\\": \\\"${SHOWNAME}\\\",
             \\\"year\\\": ${YEAR},
             \\\"ids\\\": {
                 \\\"tvdb\\\": ${TVDB_ID}
             }
-        },
-        \\\"episode\\\": {
-            \\\"season\\\": ${SEASON},
-            \\\"number\\\": ${EPISODE}
         }"
-    
     fi
     
    scrobble="$(cat << EOF
