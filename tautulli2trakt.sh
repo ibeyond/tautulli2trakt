@@ -309,7 +309,6 @@ if [ -n "$MEDIA" ] ; then
     elif [[ $MEDIA == "show" ]] || [[ $MEDIA == "episode" ]]; then
        body="\\\"show\\\": {
             \\\"title\\\": \\\"${SHOWNAME}\\\",
-            \\\"year\\\": ${YEAR:2000},
             \\\"ids\\\": {
                 \\\"tvdb\\\": ${TVDB_ID}
             }
